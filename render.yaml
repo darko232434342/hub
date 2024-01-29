@@ -1,0 +1,2 @@
+buildCommand: dotnet build -c Release
+startCommand: dotnet run -c Release

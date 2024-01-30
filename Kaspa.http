@@ -1,6 +1,6 @@
 @Kaspa_HostAddress = http://localhost:5105
 
-GET {{Kaspa_HostAddress}}/weatherforecast/
+GET {{Kaspa_HostAddress}}/MyProgram/
 Accept: application/json
 
 ###

